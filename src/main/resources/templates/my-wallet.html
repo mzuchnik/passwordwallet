@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My wallet</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<h2>My Password Wallet</h2>
+<div class="wallet-content">
+    <table class="wallet-list">
+        <tr>
+            <td><b>Web address: </b></td>
+            <td><b>Web login: </b></td>
+            <td><b>Web password: </b></td>
+            <td><b>Web description: </b></td>
+        </tr>
+        <tr class="wallet-item" th:each="userPassword : ${userPasswords}">
+            <td class="user-password-url">
+                <th:block th:text="${userPassword.webAddress}"></th:block>
+            </td>
+            <td class="user-password-login">
+                <th:block th:text="${userPassword.webLogin}"></th:block>
+            </td>
+            <td class="user-password-password">
+                <th:block th:text="${userPassword.webPassword}"></th:block>
+            </td>
+            <td class="user-password-description">
+                <th:block th:text="${userPassword.webDescription}"></th:block>
+            </td>
+        </tr>
+    </table>
+    <p><b>Actions: </b></p>
+    <div style="margin-bottom: 30px;">
+        <a href="/wallet?encryptor=encrypt" style="text-decoration: none; padding: 15px; background-color: beige">Encrypt
+            Password</a>
+        <a href="/wallet?encryptor=decrypt" style="text-decoration: none; padding: 15px; background-color: beige">Decrypt
+            Password</a>
+        <a href="/logout" style="text-decoration: none; padding: 15px; background-color: indianred">Logout</a>
+        <a href="/changePassword" style="text-decoration: none; padding: 15px; background-color: aquamarine">Change Account Password</a>
+    </div>
+</div>
+<button id="showNewPasswordForm">Add new password to wallet</button>
+<div id="password-form" class="add-new-password hidden-form">
+    <form th:action="@{/wallet/add}" th:object="${passwordForm}" method="post">
+        <table>
+            <tr>
+                <td><label th:for="*{webAddress}">Web Address: </label></td>
+                <td><input type="text" th:field="*{webAddress}"></td>
+            </tr>
+            <tr>
+                <td><label th:for="*{webDescription}">Description: </label></td>
+                <td><input type="text" th:field="*{webDescription}"></td>
+            </tr>
+            <tr>
+                <td><label th:for="*{webLogin}">Login: </label></td>
+                <td><input type="text" th:field="*{webLogin}"></td>
+            </tr>
+            <tr>
+                <td><label th:for="*{webPassword}">Password: </label></td>
+                <td><input type="password" th:field="*{webPassword}"></td>
+            </tr>
+        </table>
+        <input type="submit" value="Add">
+    </form>
+</div>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

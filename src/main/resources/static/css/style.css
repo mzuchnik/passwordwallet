@@ -1,0 +1,12 @@
+.hidden-form{
+    visibility: hidden;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table tr td{
+    padding: 15px;
+    border: 1px solid black;
+}
